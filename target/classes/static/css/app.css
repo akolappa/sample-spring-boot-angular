@@ -1,0 +1,36 @@
+.tab-active {
+	font-weight: bold;
+	border-bottom: 0px solid white;
+	z-index: 3;
+}
+
+.variable-selected {
+	font-weight: bold;
+}
+
+.column {
+	height: 100%;
+}
+
+.column-content {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.dimScreen {
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: white;
+	opacity: 0.8;
+	align-items:center;
+    justify-content:center;
+    display:flex;
+    z-index: 4;
+}
+
+.blue-link { color: #0000EE; }

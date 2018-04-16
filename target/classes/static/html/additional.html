@@ -1,0 +1,24 @@
+<div ng-controller="AdditionalController">
+	<div class="container-fluid" style="padding: 30px 30px 20px 0">
+		<div class="row">
+			<form>
+				<div class="col-xs-8">
+					<input type="file" demo-file-model="myFile" class="form-control" id="myFileField"
+						accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+				</div>
+				<div class="col-xs-4">
+					<button ng-click="uploadFile()" class="btn btn-primary">Upload File</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div ng-show="isUploadingExcel">
+		<div class="dimScreen">
+			<div style="width:50%"><uib-progressbar max="100" value="progress.percentage"><span style="color:white; white-space:nowrap;height:30px">{{progress.percentage}}  {{progress.message}}</span></uib-progressbar></div>
+		</div>
+	</div>
+	<div ng-show="isErrorMessagePresent()">
+		<font color="red" ng-bind="errorMessage"></font>
+	</div>
+	<div ui-view=""></div>
+</div>

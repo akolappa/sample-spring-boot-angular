@@ -1,0 +1,75 @@
+<div ng-controller="ChallengeController" class="container-fluid" style="padding: 30px;">
+	<div class="row">
+		<div class="col-xs-4">
+			
+			<div class="row" style="font-weight: bold">Max Rows in Excel: {{excelMaxRows}}</div>
+			</br></br>
+			<div class="row" style="font-weight: bold">Select Prognostic Variables:</div>
+			</br>
+			<div class="row" ng-repeat="variable in variables">
+				<div class="col-xs-4 column blue-link" ng-click="selectDeselect(variable)">
+					<h5 ng-class="showSelected(variable)" style="cursor:pointer" ng-bind="variable.name" class="column-content"></h5>
+				</div>
+				<div class="col-xs-8" ng-show="variable.selected">
+					<div ng-if="variable.type == 'Time' || variable.type == 'Numeric'">
+						<rzslider rz-slider-model="variable.value"  rz-slider-options="variable.options"></rzslider>
+					</div>
+					<div ng-if="variable.type == 'Categorical'">
+						<div ng-dropdown-multiselect="" options="variable.valuesShow" selected-model="variable.selectedValuesShow" 
+							 events="variable.events"></div>
+					</div>
+				</div>
+				</br></br>
+			</div>
+			</br></br>
+			<div class="row" style="font-weight: bold">Select Other Variables:</div>
+			</br></br>
+			<div class="row">
+				<div class="col-xs-4"><h5>No: of Treatments</h5></div>
+				<div class="col-xs-8">
+					<input type="number" class="form-control" min=1 ng-model="treatmentCount">
+				</div>
+			</div>
+			</br>
+			<div class="row">
+				<div class="col-xs-4"><h5>Sample Size</h5></div>
+				<div class="col-xs-8">
+					<rzslider rz-slider-model="sampleSize.value"  rz-slider-options="sampleSize.options"></rzslider>
+				</div>
+			</div>
+			</br></br>
+			<div class="row">
+				<div class="col-xs-4"></div>
+				<div class="col-xs-8">
+					<button type="button" class="btn btn-primary btn-block" ng-click="getData()">Submit</button>
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-xs-1">&nbsp;</div>
+		<div class="col-xs-7 inbox-table">
+			<div class="inbox-table-heading-div" ng-show="showStratumInformation()">
+				<table class="inbox-table-heading">
+					<thead>
+						<th align="center">Criterion</th>
+						<th align="center" ng-repeat="n in [] | range:stratumData[0].length">Treatment {{n + 1}}</th>
+						<th align="center">Sum</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="data in stratumData">
+							<td ng-bind-html="data[0].groupDetails"></td>
+							<td ng-repeat="rowData in data" ng-bind="rowData.count"></td>
+							<td><b ng-bind="findGroupCount(data)"></b></td>
+						</tr>
+						<tr>
+							<td><b>Total</b></td>
+							<td ng-repeat="n in [] | range:stratumData[0].length"><b ng-bind="findTotalTreatmentCount(n)"></b></td>
+							<td><b ng-bind="totalSum()"></b></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
